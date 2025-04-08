@@ -1,17 +1,18 @@
 #include "Graph.hpp"
 #include "Visitor.hpp"
+#include "HamiltonianCycle.hpp"
 
 
 int main()
 {
-    GraphWithAdjMatrix g;
+    GraphWithAdjMatrix gm;
+    GraphWithAdjList gl;
 
-    // First option
-    g.buildGraphFromFile("graph1.txt", 5);
+    gm.buildGraphFromFile("graph1.txt", 5);
+    gl.buildGraphFromFile("graph1.txt", 5);
+    
+    HamiltonianCycleFinder hc;
 
-    // Second option
-    // g.buildRandomGraph(5);
-
-    DummyVisitor visitor;
-    visitor.visitGraphWithAdjMatrix(g);
+    gm.accept(hc);
+    gl.accept(hc);
 }

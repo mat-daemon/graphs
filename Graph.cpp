@@ -14,6 +14,7 @@ void Graph::buildGraphFromFile(std::string fileName, int numberOfVertices)
         return;
     }
 
+    this->numberOfVertices = numberOfVertices;
     reserveMemoryForVertices(numberOfVertices);
 
     std::string row;
@@ -37,12 +38,16 @@ void Graph::buildGraphFromFile(std::string fileName, int numberOfVertices)
     }
 }
 
+int Graph::getNumberOfVertices()
+{
+    return numberOfVertices;
+}
+
 void Graph::buildRandomGraph(int numberOfVertices)
 {
-    int maxEdge = 50;
     std::random_device rd;                         
     std::mt19937 gen(rd());                        
-    std::uniform_int_distribution<> dist(1, maxEdge*2);
+    std::uniform_int_distribution<> dist(0, 1);
 
     reserveMemoryForVertices(numberOfVertices);
 
@@ -51,18 +56,14 @@ void Graph::buildRandomGraph(int numberOfVertices)
         for (int dst = 0; dst < numberOfVertices; ++dst)
         {
             int random_number = dist(gen);
-
-            if(random_number < 50)
-            {
-                addEdge(src, dst, random_number);
-            }
+            addEdge(src, dst, random_number);
         }
     }
 }
 
-void GraphWithAdjMatrix::accept(const std::shared_ptr<Visitor>& visitor)
+void GraphWithAdjMatrix::accept(Visitor& visitor)
 {
-    visitor->visitGraphWithAdjMatrix(*this);
+    visitor.visitGraphWithAdjMatrix(*this);
 }
 
 void GraphWithAdjMatrix::reserveMemoryForVertices(int numberOfVertices)
@@ -80,9 +81,19 @@ void GraphWithAdjMatrix::addEdge(int src, int dst, int edge)
     adjacencyMatrix[src][dst] = edge;
 }
 
-void GraphWithAdjList::accept(const std::shared_ptr<Visitor>& visitor)
+const std::vector<std::vector<int>>& GraphWithAdjMatrix::getAdjacencyMatrix()
 {
-    visitor->visitGraphWithAdjList(*this);
+    return adjacencyMatrix;
+}
+
+const std::vector<std::list<int>>& GraphWithAdjList::getAdjacencyList()
+{
+    return adjacencyList;
+}
+
+void GraphWithAdjList::accept(Visitor& visitor)
+{
+    visitor.visitGraphWithAdjList(*this);
 }
 
 void GraphWithAdjList::reserveMemoryForVertices(int numberOfVertices)
@@ -92,5 +103,5 @@ void GraphWithAdjList::reserveMemoryForVertices(int numberOfVertices)
 
 void GraphWithAdjList::addEdge(int src, int dst, int edge)
 {
-    adjacencyList[src].push_back(edge);
+    if(edge == 1) adjacencyList[src].push_back(dst);
 }

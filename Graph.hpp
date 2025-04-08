@@ -12,17 +12,21 @@ class Graph
     public:
         void buildGraphFromFile(std::string, int);
         void buildRandomGraph(int);
-        virtual void accept(const std::shared_ptr<Visitor>&) = 0;
+        int getNumberOfVertices();
+        virtual void accept(Visitor&) = 0;
     protected:
         virtual void addEdge(int, int, int) = 0;
         virtual void reserveMemoryForVertices(int) = 0;
+    private:
+        int numberOfVertices;
 };
 
 
 class GraphWithAdjMatrix : public Graph
 {
     public:
-        void accept(const std::shared_ptr<Visitor>&);
+        void accept(Visitor&);
+        const std::vector<std::vector<int>>& getAdjacencyMatrix();
     protected:
         void addEdge(int, int, int) override;
         void reserveMemoryForVertices(int) override;
@@ -34,7 +38,8 @@ class GraphWithAdjMatrix : public Graph
 class GraphWithAdjList : public Graph
 {
     public:
-        void accept(const std::shared_ptr<Visitor>&);
+        void accept(Visitor&);
+        const std::vector<std::list<int>>& getAdjacencyList();
     protected:
         void addEdge(int, int, int) override;
         void reserveMemoryForVertices(int) override;

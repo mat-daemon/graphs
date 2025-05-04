@@ -6,7 +6,6 @@
 #include <numeric>
 
 std::optional<std::vector<int>> IsomorphismVisitor::visit(const AdjacencyMatrixGraph& graph1, const AdjacencyMatrixGraph& graph2) const {
-    std::cout << "Visiting AdjacencyMatrixGraph for isomorphism." << std::endl;
     // Implement the isomorphism logic for AdjacencyMatrixGraph
     const auto& adjacencyMatrix1 = graph1.getAdjacencyMatrix();
     const auto& adjacencyMatrix2 = graph2.getAdjacencyMatrix();
@@ -59,7 +58,6 @@ std::optional<std::vector<int>> IsomorphismVisitor::visit(const AdjacencyMatrixG
 }
 
 std::optional<std::vector<int>> IsomorphismVisitor::visit(const AdjacencyListGraph& graph1, const AdjacencyListGraph& graph2) const {
-    std::cout << "Visiting AdjacencyListGraph for isomorphism." << std::endl;
     // Implement the isomorphism logic for AdjacencyListGraph
     const auto& adjacencyList1 = graph1.getAdjacencyList();
     const auto& adjacencyList2 = graph2.getAdjacencyList();

@@ -79,7 +79,6 @@ int HamiltonVisitor::isValidVertex(const std::vector<std::list<int>>& graph, int
 
 std::optional<std::vector<int>> HamiltonVisitor::visit(const AdjacencyMatrixGraph& graph) const
 {
-    std::cout << "Visiting AdjacencyMatrixGraph for Hamiltonian cycle." << std::endl;
     int numVertices = graph.getNumVertices();
     Path path(numVertices, -1);
     path[0] = 0; // Start from the first vertex
@@ -91,7 +90,6 @@ std::optional<std::vector<int>> HamiltonVisitor::visit(const AdjacencyMatrixGrap
 
 std::optional<std::vector<int>> HamiltonVisitor::visit(const AdjacencyListGraph& graph) const
 {
-    std::cout << "Visiting AdjacencyListGraph for Hamiltonian cycle." << std::endl;
     int numVertices = graph.getNumVertices();
     Path path(numVertices, -1);
     path[0] = 0; // Start from the first vertex

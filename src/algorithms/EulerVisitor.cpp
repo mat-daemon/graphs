@@ -6,7 +6,6 @@
 #include <algorithm>
 
 std::optional<std::vector<int>> EulerVisitor::visit(const AdjacencyMatrixGraph& graph) const {
-    std::cout << "Visiting AdjacencyMatrixGraph for Eulerian path/circuit." << std::endl;
     // Implement the Eulerian path or circuit logic for AdjacencyMatrixGraph
     const auto& adjacencyMatrix = graph.getAdjacencyMatrix();
     int numVertices = graph.getNumVertices();
@@ -84,7 +83,6 @@ std::optional<std::vector<int>> EulerVisitor::visit(const AdjacencyMatrixGraph& 
 
 std::optional<std::vector<int>> EulerVisitor::visit(const AdjacencyListGraph& graph) const {
     // Implement the Eulerian path or circuit logic for AdjacencyListGraph
-    std::cout << "Visiting AdjacencyListGraph for Eulerian path/circuit." << std::endl;
     const auto& adjacencyList = graph.getAdjacencyList();
     int numVertices = graph.getNumVertices();
     std::vector<int> eulerPath{};
